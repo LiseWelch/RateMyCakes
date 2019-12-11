@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<div class="container p-3">
+  <h1 class="m-2">Rate My Cakes</h1>
+  <div class="row m-2 justify-content-between" style="max-height: 300px;">
+    <div class="col-sm-5 m-2 px-4 pt-3 pb-2 border border-secondary text-secondary">
+      <p class="m-2"><u>Submit a cake to be rated</u></p>
+      <form class="m-2"  (submit) = "submitNewCake()">
+            <label class="col-form-label">Baker's Name:</label>
+              <input type="text" name="name" class="form-control" [(ngModel)]="newCake.BakerName">
+            <label class="col-form-label">Image Url:</label>
+              <input type="text" name="url" class="form-control" [(ngModel)]="newCake.ImageUrl">
+            <input type="submit" class = "btn btn-primary m-1 mt-3" value="Submit">
+        </form>
+    </div>
+    <div class="col-sm-6 p-2" style="overflow-y: auto; overflow-x: hidden; height: 300px;">
+        <div *ngFor = "let cake of cakes" class="row">
+          <div class="col-sm-4 p-2 align-self-center">
+            <img (click) = "getOneCake(cake)" [src] = "cake.ImageUrl" width="80%">
+          </div>
+            <div class="col-sm-7 p-2">
+                <form class="mt-3 mx-2 mb-2"  (submit) = "onSubmitNewReview(cake._id)">
+                  <select class="form-control" name="rating" [(ngModel)]="newReview.Rating">
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Stars</option>
+                    <option value="0">0 Stars</option>
+                  </select>
+                  <textarea class="my-2 form-control" name="comment" [(ngModel)]="newReview.Comment" placeholder="Type your comment here ..." rows="3" style="overflow: hidden;"></textarea>
+                    <div class="form-group row justify-content-center">
+                      <input type="submit" class = "btn btn-primary btn-sm col-sm-11" value="Rate">
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div *ngIf="selectedCake">
+    <app-review [selectedCake] = "selectedCake" [averageRating] = "averageRating" [reviews] = "reviews" ></app-review>
+  </div>
+</div>

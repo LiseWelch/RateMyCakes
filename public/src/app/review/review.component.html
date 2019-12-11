@@ -1,0 +1,13 @@
+<h1>Baked by {{ selectedCake.BakerName }}</h1>
+<div class="row m-2 p-2 justify-content-around">
+   <div class="col-sm-5">
+        <img [src] = "selectedCake.ImageUrl" width="100%">
+   </div>
+   <div class="col-sm-5 text-secondary" style="overflow-y:scroll; overflow-x: hidden;">
+        <h2>Average Rating: {{ averageRating }}</h2>
+        <div *ngFor = "let review of reviews" class="m-3">
+            <h3>{{ review.Comment }}</h3>
+            <h3>{{ review.Rating }} Stars</h3>
+        </div>
+   </div> 
+</div>
